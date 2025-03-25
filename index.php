@@ -128,13 +128,6 @@ require_once("components/Footer.php");
         </section>
 
 
-        <?php
-        foreach(getAllCategories() as $categoryName){
-            echo "<h1>$categoryName</h1>";
-        }
-        ?>
-
-
         <!-- Footer-->
          <?php Footer(); ?>
         <!-- Bootstrap core JS-->
