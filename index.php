@@ -1,7 +1,8 @@
 <?php
-include_once("Models/Product.php")
-
-
+// ONCE = en gång även om det blir cirkelreferenser
+#include_once("Models/Products.php") - OK även om filen inte finns
+require_once("Models/Product.php");
+require_once("components/Footer.php");
 ?>
 
 <!DOCTYPE html>
@@ -32,11 +33,11 @@ include_once("Models/Product.php")
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="#!">All Products</a></li>
                                 <li><hr class="dropdown-divider" /></li>
-                                <?php
-                                foreach(getAllCategories() as $cat){
-                                    echo "<li><a class='dropdown-item' href='#!'>$cat</a></li>";
-                                }
-                                ?>
+                                    <?php
+                                    foreach(getAllCategories() as $cat){
+                                        echo "<li><a class='dropdown-item' href='#!'>$cat</a></li>";
+                                    } 
+                                    ?> 
                                     <li><a class="dropdown-item" href="#!">En cat</a></li>
                             </ul> 
                         </li>
@@ -66,25 +67,32 @@ include_once("Models/Product.php")
         <section class="py-5">
             <div class="container px-4 px-lg-5 mt-5">
                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                <?php 
+                foreach(getAllProducts() as $prod){
+                ?>                    
                     <div class="col mb-5">
-                        <div class="card h-100">
-                            <!-- Product image-->
-                            <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-                            <!-- Product details-->
-                            <div class="card-body p-4">
-                                <div class="text-center">
-                                    <!-- Product name-->
-                                    <h5 class="fw-bolder">Fancy Product</h5>
-                                    <!-- Product price-->
-                                    $40.00
+                            <div class="card h-100">
+                                <?php if($prod->price < 10) {  ?>
+                                    <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
+                                <?php } ?>        
+                                <!-- Product image-->
+                                <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+                                <!-- Product details-->
+                                <div class="card-body p-4">
+                                    <div class="text-center">
+                                        <!-- Product name-->
+                                        <h5 class="fw-bolder"><?php echo $prod->title; ?></h5>
+                                        <!-- Product price-->
+                                        $<?php echo $prod->price; ?>.00
+                                    </div>
+                                </div>
+                                <!-- Product actions-->
+                                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                    <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
                                 </div>
                             </div>
-                            <!-- Product actions-->
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
-                            </div>
-                        </div>
-                    </div>       
+                        </div>    
+                    <?php } ?>  
                     <div class="col mb-5">
                         <div class="card h-100">
                             <!-- Sale badge-->
@@ -118,10 +126,17 @@ include_once("Models/Product.php")
                 </div>
             </div> 
         </section>
+
+
+        <?php
+        foreach(getAllCategories() as $categoryName){
+            echo "<h1>$categoryName</h1>";
+        }
+        ?>
+
+
         <!-- Footer-->
-        <footer class="py-5 bg-dark">
-            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Shop 2025</p></div>
-        </footer>
+         <?php Footer(); ?>
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->

@@ -1,8 +1,6 @@
 <?php
-require_once("Models/Product.php");
+require_once('Models/Product.php');
 require_once("components/Footer.php");
-
-
 ?>
 
 <!DOCTYPE html>
@@ -20,9 +18,8 @@ require_once("components/Footer.php");
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="/css/styles.css" rel="stylesheet" />
     </head>
-    <body>
-        <!-- Navigation-->
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container px-4 px-lg-5">
                 <a class="navbar-brand" href="/index.php">SuperShoppen</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
@@ -33,6 +30,11 @@ require_once("components/Footer.php");
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="#!">All Products</a></li>
                                 <li><hr class="dropdown-divider" /></li>
+                                    <?php
+                                    foreach(getAllCategories() as $cat){
+                                        echo "<li><a class='dropdown-item' href='#!'>$cat</a></li>";
+                                    } 
+                                    ?> 
                                     <li><a class="dropdown-item" href="#!">En cat</a></li>
                             </ul> 
                         </li>
@@ -49,46 +51,69 @@ require_once("components/Footer.php");
                 </div>
             </div>
         </nav>
-        <!-- Header-->
-        <header class="bg-dark py-5">
-            <div class="container px-4 px-lg-5 my-5">
-                <div class="text-center text-white">
-                    <h1 class="display-4 fw-bolder">Super shoppen</h1>
-                    <p class="lead fw-normal text-white-50 mb-0">Handla massa onödigt hos oss!</p>
-                </div>
-            </div>
-        </header>
-        <!-- Section-->
-        <section class="py-5">
-        <div class="container px-4 px-lg-5 mt-5">
-            <table class="table">
-                <thead>
-                        <th>Name</th>
-                        <th>Category</th>
-                        <th>Price</th>
-                        <th>Stock level</th>
-                        <th>action</th>
-                </thead>
+    <section class="py-5">
+    <div class="container px-4 px-lg-5 mt-5">
 
-                <tbody>
-                <?php foreach(getAllProducts() as $prod){ ?>
-                    <tr>
-                        <td><?php echo $prod->title; ?></td>
-                        <td><?php echo $prod->categoryName; ?></td>
-                        <td><?php echo $prod->price; ?></td>
-                        <td><?php echo $prod->stockLevel; ?></td>
-                        <td><a href="edit.php?id=<?php echo $prod->id; ?>" class="btn btn-primary">Edit</a></td>
-                    </tr>
-                <?php } ?>
-                </tbody>
-            </table>
+    <?php
+
+    $id = $_GET['id'];
+    // Hämta den produkt med detta ID
+    $product = getProduct($id); // TODO felhantering om inget produkt
+
+
+    if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+        // Här kommer vi när man har tryckt  på SUBMIT
+        // IMORGON TISDAG SÅ UPDATE PRODUCT SET title = $_POST['title'] WHERE id = $id
+        $product->title = $_POST['title'];
+        $product->stockLevel = $_POST['stockLevel'];
+        $product->price = $_POST['price'];
+        $product->categoryName = $_POST['categoryName'];
+        echo "<h1>Produkten har uppdaterats</h1>";
+    }else{
+        // Det är INTE ett formulär som har postats - utan man har klickat in på länk tex edit.php?id=12
+    }
+
+    //Kunna lagra i databas
+
+
+    ?>
+
+    <form method="POST" > 
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" class="form-control" name="title" value="<?php echo $product->title ?>">
         </div>
-        </section>
-        <!-- Footer-->
-        <?php Footer(); ?>
-        <!-- Bootstrap core JS-->
+        <div class="form-group">
+            <label for="price">Price</label>
+            <input type="text" class="form-control" name="price" value="<?php echo $product->price ?>">
+        </div>
+        <div class="form-group">
+            <label for="stockLevel">Stock</label>
+            <input type="text" class="form-control" name="stockLevel" value="<?php echo $product->stockLevel ?>">
+        </div>
+        <div class="form-group">
+            <label for="categpryName">Category name:</label>
+            <input type="text" class="form-control" name="categoryName" value="<?php echo $product->categoryName ?>">
+        </div>
+        <input type="submit" class="btn btn-primary" value="Uppdatera">
+    </form>
+</div>
+</section>
+
+
+
+<?php Footer(); ?>
+<!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
         <script src="js/scripts.js"></script>
-    </body>
+
+</body>
 </html>
+
+<!-- 
+<input type="text" name="title" value="<?php echo $product->title ?>">
+        <input type="text" name="price" value="<?php echo $product->price ?>">
+        <input type="text" name="stockLevel" value="<?php echo $product->stockLevel ?>">
+        <input type="text" name="categoryName" value="<?php echo $product->categoryName ?>">
+        <input type="submit" value="Uppdatera"> -->
