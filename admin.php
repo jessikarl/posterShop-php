@@ -73,9 +73,30 @@ $sortOrder = $_GET["sortOrder"] ??"";
                                 <i class="bi bi-caret-up-fill"></i>
                             </a>
                         </th>
-                        <th>Category</th>
-                        <th>Price</th>
-                        <th>Stock level</th>
+                        <th>Category
+                            <a href="admin.php?sortCol=categoryName&sortOrder=asc">
+                                <i class="bi bi-caret-down-fill"></i>
+                            </a>
+                            <a href="admin.php?sortCol=categoryName&sortOrder=desc">
+                                <i class="bi bi-caret-up-fill"></i>
+                            </a>
+                        </th>
+                        <th>Price
+                            <a href="admin.php?sortCol=price&sortOrder=asc">
+                                <i class="bi bi-caret-down-fill"></i>
+                            </a>
+                            <a href="admin.php?sortCol=price&sortOrder=desc">
+                                <i class="bi bi-caret-up-fill"></i>
+                            </a>
+                        </th>
+                        <th>Stock level
+                            <a href="admin.php?sortCol=stockLevel&sortOrder=asc">
+                                <i class="bi bi-caret-down-fill"></i>
+                            </a>
+                            <a href="admin.php?sortCol=stockLevel&sortOrder=desc">
+                                <i class="bi bi-caret-up-fill"></i>
+                            </a>
+                        </th>
                         <th>action</th>
                 </thead>
 
