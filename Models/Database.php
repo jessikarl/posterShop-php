@@ -23,6 +23,23 @@
             )");
         }
 
+        function getProduct($id){
+            $query = $this->pdo->prepare("SELECT * FROM Products WHERE id = :id");
+            $query->execute(["id"=> $id]);
+            $query->setFetchMode(PDO::FETCH_CLASS,"Product");
+            return $query->fetch();
+        }
+
+        function updateProduct($product){
+            $s = "UPDATE Products SET title = :title," .
+                " price = :price, stockLevel = :stockLevel, categoryName = :categoryName WHERE id = :id";
+            $query = $this->pdo->prepare($s);
+            $query->execute(['title' => $product->title, 'price' => $product->price,
+                'stockLevel' => $product->stockLevel, 'categoryName' => $product->categoryName, 
+                'id' => $product->id]);
+        }
+
+
         function getAllProducts($sortCol="id", $sortOrder="asc"){
             if(!in_array($sortCol,["id", "title", "price", "stockLevel"])){
                 $sortCol = "id";

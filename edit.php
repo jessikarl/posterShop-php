@@ -1,6 +1,28 @@
 <?php
 require_once('Models/Product.php');
 require_once("components/Footer.php");
+require_once("Models/Database.php");
+
+$id = $_GET['id'];
+$dbContext = new Database();
+// Hämta den produkt med detta ID
+$product = $dbContext->getProduct($id); // TODO felhantering om inget produkt
+
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+    // Här kommer vi när man har tryckt  på SUBMIT
+    // IMORGON TISDAG SÅ UPDATE PRODUCT SET title = $_POST['title'] WHERE id = $id
+    $product->title = $_POST['title'];
+    $product->stockLevel = $_POST['stockLevel'];
+    $product->price = $_POST['price'];
+    $product->categoryName = $_POST['categoryName'];
+    $dbContext->updateProduct($product);
+    echo "<h1>Produkten har uppdaterats</h1>";
+}else{
+    // Det är INTE ett formulär som har postats - utan man har klickat in på länk tex edit.php?id=12
+}
+
+//Kunna lagra i databas
 ?>
 
 <!DOCTYPE html>
@@ -53,30 +75,6 @@ require_once("components/Footer.php");
         </nav>
     <section class="py-5">
     <div class="container px-4 px-lg-5 mt-5">
-
-    <?php
-
-    $id = $_GET['id'];
-    // Hämta den produkt med detta ID
-    $product = getProduct($id); // TODO felhantering om inget produkt
-
-
-    if ($_SERVER['REQUEST_METHOD'] == 'POST'){
-        // Här kommer vi när man har tryckt  på SUBMIT
-        // IMORGON TISDAG SÅ UPDATE PRODUCT SET title = $_POST['title'] WHERE id = $id
-        $product->title = $_POST['title'];
-        $product->stockLevel = $_POST['stockLevel'];
-        $product->price = $_POST['price'];
-        $product->categoryName = $_POST['categoryName'];
-        echo "<h1>Produkten har uppdaterats</h1>";
-    }else{
-        // Det är INTE ett formulär som har postats - utan man har klickat in på länk tex edit.php?id=12
-    }
-
-    //Kunna lagra i databas
-
-
-    ?>
 
     <form method="POST" > 
         <div class="form-group">
