@@ -3,6 +3,9 @@
 #include_once("Models/Products.php") - OK även om filen inte finns
 require_once("Models/Product.php");
 require_once("components/Footer.php");
+require_once("Models/Database.php");
+
+$dbContext = new Database();
 ?>
 
 <!DOCTYPE html>
@@ -34,7 +37,7 @@ require_once("components/Footer.php");
                                 <li><a class="dropdown-item" href="#!">All Products</a></li>
                                 <li><hr class="dropdown-divider" /></li>
                                     <?php
-                                    foreach(getAllCategories() as $cat){
+                                    foreach($dbContext->getAllCategories() as $cat){
                                         echo "<li><a class='dropdown-item' href='#!'>$cat</a></li>";
                                     } 
                                     ?> 
@@ -68,7 +71,7 @@ require_once("components/Footer.php");
             <div class="container px-4 px-lg-5 mt-5">
                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
                 <?php 
-                foreach(getAllProducts() as $prod){
+                foreach($dbContext->getAllProducts() as $prod){
                 ?>                    
                     <div class="col mb-5">
                             <div class="card h-100">

@@ -1,8 +1,18 @@
 <?php
 require_once("Models/Product.php");
 require_once("components/Footer.php");
+require_once("Models/Database.php");
 
+$dbContext = new Database();
 
+$sortCol = $_GET["sortCal"] ??"";
+
+//$sortCol = $_GET[""];
+//if($sortCol == null) {
+//    $sortCol = "";
+//} samma som koden ovan med "??" 
+
+$sortOrder = $_GET["sortOrder"] ??"";
 ?>
 
 <!DOCTYPE html>
@@ -21,6 +31,7 @@ require_once("components/Footer.php");
         <link href="/css/styles.css" rel="stylesheet" />
     </head>
     <body>
+        
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container px-4 px-lg-5">
@@ -49,21 +60,19 @@ require_once("components/Footer.php");
                 </div>
             </div>
         </nav>
-        <!-- Header-->
-        <header class="bg-dark py-5">
-            <div class="container px-4 px-lg-5 my-5">
-                <div class="text-center text-white">
-                    <h1 class="display-4 fw-bolder">Super shoppen</h1>
-                    <p class="lead fw-normal text-white-50 mb-0">Handla massa onödigt hos oss!</p>
-                </div>
-            </div>
-        </header>
         <!-- Section-->
         <section class="py-5">
         <div class="container px-4 px-lg-5 mt-5">
             <table class="table">
                 <thead>
-                        <th>Name</th>
+                        <th>Name
+                            <a href="admin.php?sortCol=title&sortOrder=asc">
+                                <i class="bi bi-caret-down-fill"></i>
+                            </a>
+                            <a href="admin.php?sortCol=title&sortOrder=desc">
+                                <i class="bi bi-caret-up-fill"></i>
+                            </a>
+                        </th>
                         <th>Category</th>
                         <th>Price</th>
                         <th>Stock level</th>
@@ -71,7 +80,7 @@ require_once("components/Footer.php");
                 </thead>
 
                 <tbody>
-                <?php foreach(getAllProducts() as $prod){ ?>
+                <?php foreach($dbContext->getAllProducts($sortCol, $sortOrder) as $prod){ ?>
                     <tr>
                         <td><?php echo $prod->title; ?></td>
                         <td><?php echo $prod->categoryName; ?></td>
