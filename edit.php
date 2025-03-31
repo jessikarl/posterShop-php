@@ -1,7 +1,7 @@
 <?php
 require_once('Models/Product.php');
 require_once("components/Footer.php");
-require_once("Models/Database.php");
+require_once('Models/Database.php');
 
 $id = $_GET['id'];
 $dbContext = new Database();
@@ -53,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
                                 <li><a class="dropdown-item" href="#!">All Products</a></li>
                                 <li><hr class="dropdown-divider" /></li>
                                     <?php
-                                    foreach(getAllCategories() as $cat){
+                                    foreach($dbContext->getAllCategories() as $cat){
                                         echo "<li><a class='dropdown-item' href='#!'>$cat</a></li>";
                                     } 
                                     ?> 

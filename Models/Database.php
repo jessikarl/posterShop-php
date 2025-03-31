@@ -1,14 +1,26 @@
 <?php
+    require_once("vendor/autoload.php");
+
+    //NAMESPACES
+
+    $dotenv = Dotenv\Dotenv::createImmutable(".");
+    $dotenv->load();
+    // pilar istället för .
+    // \ istället .
+    
+    // import * as dotenv from "dotenv";
+
     class Database {
         public $pdo;
 
         function __construct() {
-            $host = "localhost";
-            $db = "theshop";
-            $user = "root";
-            $pass = "root";
+            $host = $_ENV["HOST"];
+            $db = $_ENV["DB"];
+            $user = $_ENV["USER"];
+            $pass = $_ENV["PASSWORD"];
+            $port = $_ENV["PORT"];
 
-            $dsn = "mysql:host=$host;port=8889;dbname=$db";
+            $dsn = "mysql:host=$host;$port=8889;dbname=$db";
             $this->pdo = new PDO($dsn, $user, $pass);
             $this->initDatabase();
             $this->initData();
