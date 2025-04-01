@@ -18,11 +18,17 @@ $router = new Router();
 $router->addRoute('/', function () {
     require_once( __DIR__ .'/pages/home.php');
 });
-$router->addRoute('/admin/admin', function () {
+$router->addRoute('/category', function () {
+    require_once( __DIR__ .'/pages/category.php');
+});
+$router->addRoute('/admin/products', function () {
     require_once( __DIR__ .'/pages/admin.php');
 });
 $router->addRoute('/admin/edit', function () {
     require_once( __DIR__ .'/pages/edit.php');
+});
+$router->addRoute('/admin/new', function () {
+    require_once( __DIR__ .'/pages/new.php');
 });
 
 $router->dispatch();

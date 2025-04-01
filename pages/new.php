@@ -3,27 +3,18 @@ require_once('Models/Product.php');
 require_once("components/Footer.php");
 require_once('Models/Database.php');
 
-$id = $_GET['id'];
 $dbContext = new Database();
-// Hämta den produkt med detta ID
-$product = $dbContext->getProduct($id); // TODO felhantering om inget produkt
-
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
-    // Här kommer vi när man har tryckt  på SUBMIT
-    // IMORGON TISDAG SÅ UPDATE PRODUCT SET title = $_POST['title'] WHERE id = $id
-    $product->title = $_POST['title'];
-    $product->stockLevel = $_POST['stockLevel'];
-    $product->price = $_POST['price'];
-    $product->categoryName = $_POST['categoryName'];
-    $dbContext->updateProduct($product);
+    $title = $_POST['title'];
+    $stockLevel = $_POST['stockLevel'];
+    $price = $_POST['price'];
+    $categoryName = $_POST['categoryName'];
+    $dbContext->insertProduct($title, $stockLevel, $price, $categoryName);
     header("Location: /admin/products");
     exit;
 }else{
-    // Det är INTE ett formulär som har postats - utan man har klickat in på länk tex edit.php?id=12
 }
-
-//Kunna lagra i databas
 ?>
 
 <!DOCTYPE html>
@@ -76,26 +67,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
         </nav>
     <section class="py-5">
     <div class="container px-4 px-lg-5 mt-5">
-    <h2>Edit product</h2>
-
+    <h2>Create new product</h2>
     <form method="POST" > 
         <div class="form-group">
             <label for="title">Title</label>
-            <input type="text" class="form-control" name="title" value="<?php echo $product->title ?>">
+            <input type="text" class="form-control" name="title" value="">
         </div>
         <div class="form-group">
             <label for="price">Price</label>
-            <input type="text" class="form-control" name="price" value="<?php echo $product->price ?>">
+            <input type="text" class="form-control" name="price" value="">
         </div>
         <div class="form-group">
             <label for="stockLevel">Stock</label>
-            <input type="text" class="form-control" name="stockLevel" value="<?php echo $product->stockLevel ?>">
+            <input type="text" class="form-control" name="stockLevel" value="">
         </div>
         <div class="form-group">
             <label for="categpryName">Category name:</label>
-            <input type="text" class="form-control" name="categoryName" value="<?php echo $product->categoryName ?>">
+            <input type="text" class="form-control" name="categoryName" value="">
         </div>
-        <input type="submit" class="btn btn-primary" value="Uppdatera">
+        <input type="submit" class="btn btn-primary" value="Create">
     </form>
 </div>
 </section>

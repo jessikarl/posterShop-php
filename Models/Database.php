@@ -56,6 +56,11 @@
                 'id' => $product->id]);
         }
 
+        function insertProduct($title, $price, $stockLevel, $categoryName){
+            $sql = "INSERT INTO Products (title, price, stockLevel, categoryName) VALUES (:title, :price, :stockLevel, :categoryName)";
+            $query = $this->pdo->prepare($sql);
+            $query->execute(["title"=> $title,"price"=> $price,"stockLevel"=> $stockLevel, "categoryName"=> $categoryName]);
+        }
 
         function getAllProducts($sortCol="id", $sortOrder="asc"){
             if(!in_array($sortCol,["id", "title", "price", "stockLevel"])){
