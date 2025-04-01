@@ -1,15 +1,4 @@
 <?php
-    require_once("vendor/autoload.php");
-
-    //NAMESPACES
-
-    $dotenv = Dotenv\Dotenv::createImmutable(".");
-    $dotenv->load();
-    // pilar istället för .
-    // \ istället .
-    
-    // import * as dotenv from "dotenv";
-
     class Database {
         public $pdo;
 
