@@ -81,6 +81,17 @@
             return $query->fetchAll(PDO::FETCH_CLASS,"Product");
         }
 
+        function getCategoryProducts($catName){
+            if($catName == ""){
+                $query = $this->pdo->query("SELECT * FROM Products");
+                return $query->fetchAll(PDO::FETCH_CLASS, 'Product'); 
+            }
+            $query = $this->pdo->prepare("SELECT * FROM Products WHERE categoryName = :categoryName");
+            $query->execute(['categoryName' => $catName]);
+            return $query->fetchAll(PDO::FETCH_CLASS, 'Product');
+        }
+
+
         function getAllCategories (){
             $data = $this->pdo->query("SELECT DISTINCT categoryName FROM Products")->fetchAll(PDO::FETCH_COLUMN);
             return $data;
