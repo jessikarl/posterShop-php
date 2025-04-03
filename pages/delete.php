@@ -4,24 +4,17 @@ require_once("components/Footer.php");
 require_once('Models/Database.php');
 
 $id = $_GET['id'];
+$confirmed = $_GET['confirmed'] ?? false;
 $dbContext = new Database();
 // Hämta den produkt med detta ID
 $product = $dbContext->getProduct($id); // TODO felhantering om inget produkt
 
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST'){
-    $product->title = $_POST['title'];
-    $product->stockLevel = $_POST['stockLevel'];
-    $product->price = $_POST['price'];
-    $product->categoryName = $_POST['categoryName'];
-    $dbContext->updateProduct($product);
-    header("Location: /admin/products");
+if($confirmed == true) {
+    $dbContext->deleteProduct ($id);
+    header('Location: /admin/products');
     exit;
-}else{
-    // Det är INTE ett formulär som har postats - utan man har klickat in på länk tex edit.php?id=12
 }
 
-//Kunna lagra i databas
 ?>
 
 <!DOCTYPE html>
@@ -74,27 +67,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
         </nav>
     <section class="py-5">
     <div class="container px-4 px-lg-5 mt-5">
-    <h2>Edit product</h2>
 
-    <form method="POST" > 
-        <div class="form-group">
-            <label for="title">Title</label>
-            <input type="text" class="form-control" name="title" value="<?php echo $product->title ?>">
-        </div>
-        <div class="form-group">
-            <label for="price">Price</label>
-            <input type="text" class="form-control" name="price" value="<?php echo $product->price ?>">
-        </div>
-        <div class="form-group">
-            <label for="stockLevel">Stock</label>
-            <input type="text" class="form-control" name="stockLevel" value="<?php echo $product->stockLevel ?>">
-        </div>
-        <div class="form-group">
-            <label for="categpryName">Category name:</label>
-            <input type="text" class="form-control" name="categoryName" value="<?php echo $product->categoryName ?>">
-        </div>
-        <input type="submit" class="btn btn-primary" value="Uppdatera">
-    </form>
+    <h1><?php echo $product->title; ?></h1>
+    <h2>Är du säker på att du vill ta bort?</h2>
+    <a href="/admin/delete?id=<?php echo $id; ?>&confirmed=true" class="btn btn-danger">Ja</a>
+    <a href="/admin/products" class="btn btn-primary">Nej</a>
+
+
+
+   
 </div>
 </section>
 
