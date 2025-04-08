@@ -39,6 +39,12 @@ $router->addRoute('/user/login', function () {
 $router->addRoute('/user/logout', function () {
     require_once( __DIR__ .'/pages/users/logout.php');
 });
+$router->addRoute('/user/register', function () {
+    require_once( __DIR__ .'/pages/users/register.php');
+});
+$router->addRoute('/user/registerThanks', function () {
+    require_once( __DIR__ .'/pages/users/registerThanks.php');
+});
 
 $router->dispatch();
 
