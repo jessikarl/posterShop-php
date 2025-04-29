@@ -90,7 +90,11 @@ require_once("vendor/autoload.php");
             $query->execute(['title' => $title, 'price' => $price,
                 'stockLevel' => $stockLevel, 'categoryName' => $categoryName]);
         }
-
+        function searchProducts($q){
+            $query = $this->pdo->prepare("SELECT * FROM Products WHERE title LIKE :q");
+            $query->execute(['q' => "%$q%"]);
+            return $query->fetchAll(PDO::FETCH_CLASS, 'Product');
+        }
 
         //function getAllProducts($sortCol, $sortOrder){
         function getAllProducts($sortCol="id", $sortOrder= "asc"){

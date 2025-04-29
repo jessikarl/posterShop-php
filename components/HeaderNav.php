@@ -30,6 +30,10 @@ function HeaderNav($dbContext, $cart){
                         }
                         ?>
                     </ul>
+                    <form action="/search" method="GET">
+                            <input type="text" name="q" placeholder="Search" class="form-control">
+                            <button class="btn btn-outline-dark" type="submit">Search</button>
+                    </form> 
                     <?php if($dbContext->getUsersDatabase()->getAuth()->isLoggedIn()){ ?>
                         Current user: <?php echo $dbContext->getUsersDatabase()->getAuth()->getUsername() ?>
                     <?php } ?>
