@@ -3,9 +3,10 @@
 #include_once("Models/Products.php") - OK även om filen inte finns
 require_once("Models/Product.php");
 require_once("components/Footer.php");
+require_once("components/HeaderNav.php");
 require_once("Models/Database.php");
 
-$dbContext = new Database();
+global $dbContext, $cart;
 
 $q = $_GET['q'] ?? "";
 $sortCol = $_GET['sortCol'] ?? "";
@@ -36,54 +37,7 @@ $result = $dbContext->searchProducts($q,$sortCol, $sortOrder, $pageNo, $pageSize
     </head>
     <body>
         <!-- Navigation-->
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container px-4 px-lg-5">
-                <a class="navbar-brand" href="/">SuperShoppen</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Kategorier</a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="/category">All Products</a></li>
-                                <li><hr class="dropdown-divider" /></li>
-                                    <?php
-                                    foreach($dbContext->getAllCategories() as $cat){
-                                        echo "<li><a class='dropdown-item' href='/category?catname=$cat'>$cat</a></li>";
-                                    } 
-                                    ?> 
-                            </ul> 
-                        </li>
-                        <?php
-                        if($dbContext->getUsersDatabase()->getAuth()->isLoggedIn()){ ?>
-                            <li class="nav-item"><a class="nav-link" href="/user/logout">Logout</a></li>
-                        <?php }else{ ?>
-                            <li class="nav-item"><a class="nav-link" href="/user/login">Login</a></li>
-                            <li class="nav-item"><a class="nav-link" href="/user/register">Create account</a></li>
-                        <?php 
-                        }
-                        ?>
-                    </ul>
-
-                     <form action="/search" method="GET">
-                        <input type="text" name="q" value="<?php echo $q; ?>" placeholder="Search" class="form-control">
-                     </form>   
-
-
-                    <?php if($dbContext->getUsersDatabase()->getAuth()->isLoggedIn()){ ?>
-                        Current user: <?php echo $dbContext->getUsersDatabase()->getAuth()->getUsername() ?>
-                        Current user: <?php echo $dbContext->getUsersDatabase()->getAuth()->getUsername() ?>
-                    <?php } ?>
-                    <form class="d-flex">
-                        <button class="btn btn-outline-dark" type="submit">
-                            <i class="bi-cart-fill me-1"></i>
-                            Cart
-                            <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </nav>
+        <?php echo HeaderNav($dbContext, $cart) ?>
         <!-- Header-->
         <header class="bg-dark py-5">
             <div class="container px-4 px-lg-5 my-5">
@@ -97,18 +51,16 @@ $result = $dbContext->searchProducts($q,$sortCol, $sortOrder, $pageNo, $pageSize
         <section class="py-5">
             <div class="container px-4 px-lg-5 mt-5">
                 <div class="text-center mb-4">
-
                         <a href="?sortCol=title&sortOrder=asc&q=<?php echo $q;?>" class="btn btn-secondary">Title asc</a>
                         <a href="?sortCol=title&sortOrder=desc&q=<?php echo $q;?>" class="btn btn-secondary">Title desc</a>
                         <a href="?sortCol=price&sortOrder=asc&q=<?php echo $q;?>" class="btn btn-secondary">Price asc</a>
                         <a href="?sortCol=price&sortOrder=desc&q=<?php echo $q;?>" class="btn btn-secondary">Price desc</a>
                 </div>
 
-
                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
                 
                 <?php 
-                    foreach($result["data"] as $prod){
+                    foreach($dbContext->searchProducts($q,$sortCol, $sortOrder) as $prod){
                 ?>                    
                     <div class="col mb-5">
                             <div class="card h-100">
@@ -134,31 +86,9 @@ $result = $dbContext->searchProducts($q,$sortCol, $sortOrder, $pageNo, $pageSize
                         </div>    
                     <?php } ?>  
                           
-                </div>
-
-                <nav >
-                    <ul class="pagination justify-content-center">
-                        <?php for($i=1; $i <= $result["num_pages"]; $i++ ) {
-                            if($i == $pageNo){
-                                echo " <li class='page-item active'><span class='page-link'>$i</span></li>";
-                            } else {
-                                echo "<li class='page-item'><a class='page-link' href='?q=$q&pageNo=$i&sortCol=$sortCol&sortOrder=$sortOrder'>$i</a></li>";
-                            }
-                        } ?>
-                        <!-- <li class="page-item active">
-                        <span class="page-link">
-                            2
-                        </span>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li> -->
-                    </ul>
-            </nav>                
-
+                </div>               
             </div> 
         </section>
-
-
-
 
         <!-- Footer-->
          <?php Footer(); ?>
