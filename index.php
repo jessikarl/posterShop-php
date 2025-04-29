@@ -50,6 +50,9 @@ $router->addRoute('/user/registerThanks', function () {
 $router->addRoute('/addToCart', function () {
     require_once( __DIR__ .'/Pages/addToCart.php');
 });
+$router->addRoute('/cart', function () {
+    require_once( __DIR__ .'/Pages/customerCart.php');
+});
 
 $router->dispatch();
 

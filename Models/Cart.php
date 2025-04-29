@@ -14,6 +14,15 @@ class Cart {
         return $totalQuantity;
     }
 
+    public function getTotalPrice() {
+        $totalPrice = 0;
+        foreach($this->cartItems as $item) {
+            $totalPrice += $item->rowPrice;
+        }
+        return $totalPrice;
+
+    }
+
     public function __construct($dbContext, $session_id, $userId = null) {
         $this->dbContext = $dbContext;
         $this->session_id = $session_id;

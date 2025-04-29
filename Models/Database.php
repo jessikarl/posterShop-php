@@ -1,6 +1,9 @@
 <?php 
 
 require_once('Models/UserDatabase.php');
+require_once('Models/CartItem.php');
+
+
 
 // Hur kan man strukturera klasser
 // Hir kan man struktirera filer? Folders + subfolders

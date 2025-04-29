@@ -70,13 +70,13 @@ $cart = new Cart($dbContext, $session_id, $userId);
                         Current user: <?php echo $dbContext->getUsersDatabase()->getAuth()->getUsername() ?>
                     <?php } ?>
                     <form class="d-flex">
-                        <button class="btn btn-outline-dark" type="submit">
+                        <a href="/cart" class="btn btn-outline-dark" type="submit">
                             <i class="bi-cart-fill me-1"></i>
                             Cart
                             <span class="badge bg-dark text-white ms-1 rounded-pill">
                                 <?php echo $cart->getItemsCount(); ?>
                             </span>
-                        </button>
+                        </a>
                     </form>
                 </div>
             </div>
