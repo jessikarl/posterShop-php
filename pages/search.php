@@ -1,6 +1,4 @@
 <?php
-// ONCE = en gång även om det blir cirkelreferenser
-#include_once("Models/Products.php") - OK även om filen inte finns
 require_once("Models/Product.php");
 require_once("components/Footer.php");
 require_once("components/HeaderNav.php");
@@ -15,9 +13,8 @@ $pageNo = $_GET['pageNo'] ?? "1";
 
 $pageSize = $_GET['pageSize'] ?? "10";
 
-$result = $dbContext->searchProducts($q,$sortCol, $sortOrder, $pageNo, $pageSize); // $result är en array med två element: $data och $num_pages
-// $result["data"] = arrayen med produkter
-// $result["num_pages"] = antalet sidor i databasen
+$result = $dbContext->searchProducts($q,$sortCol, $sortOrder); 
+
 ?>
 
 <!DOCTYPE html>
@@ -36,7 +33,6 @@ $result = $dbContext->searchProducts($q,$sortCol, $sortOrder, $pageNo, $pageSize
         <link href="/css/styles.css" rel="stylesheet" />
     </head>
     <body>
-        <!-- Navigation-->
         <?php echo HeaderNav($dbContext, $cart) ?>
         <!-- Header-->
         <header class="bg-dark py-5">
