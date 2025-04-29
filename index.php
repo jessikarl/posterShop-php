@@ -1,20 +1,31 @@
 <?php 
-require_once("vendor/autoload.php");
-
-require_once(dirname(__FILE__) ."/Utils/router.php");
-
 ob_start(); // Startar output buffering
 // ensure_session();
 session_start();
 
+require_once("vendor/autoload.php");
+require_once(dirname(__FILE__) ."/Utils/router.php");
+require_once("Models/Cart.php");
+require_once("Models/Database.php");
+
+
 $dotenv = Dotenv\Dotenv::createImmutable(".");
 $dotenv->load();
-// pilar istället för .
-// \ istället .
 
-// import * as dotenv from "dotenv";
-//denna fil kommer alltid att laddas först 
-//ska mappa urler till pages
+$dbContext = new Database();
+
+$userId = null;
+$session_id = null;
+ 
+if($dbContext->getUsersDatabase()->getAuth()->isLoggedIn()){
+    $userId = $dbContext->getUsersDatabase()->getAuth()->getUserId();
+}
+
+$session_id = session_id();
+ 
+$cart = new Cart($dbContext, $session_id, $userId);
+
+
 
 $router = new Router();
 $router->addRoute('/', function () {

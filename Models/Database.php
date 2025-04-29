@@ -2,6 +2,8 @@
 
 require_once('Models/UserDatabase.php');
 require_once('Models/CartItem.php');
+require_once("vendor/autoload.php");
+
 
 
 

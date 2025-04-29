@@ -4,19 +4,7 @@ require_once("components/Footer.php");
 require_once("Models/Database.php");
 require_once("Models/Cart.php");
 
-
-$dbContext = new Database();
-
-$userId = null;
-$session_id = null;
- 
-if($dbContext->getUsersDatabase()->getAuth()->isLoggedIn()){
-    $userId = $dbContext->getUsersDatabase()->getAuth()->getUserId();
-}
-    //$cart = $dbContext->getCartByUser($userId);
-$session_id = session_id();
- 
-$cart = new Cart($dbContext, $session_id, $userId);
+global $dbContext, $cart;
 
 ?>
 
