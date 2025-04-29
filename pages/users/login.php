@@ -2,6 +2,8 @@
 require_once('Models/Product.php');
 require_once("components/Footer.php");
 require_once('Models/Database.php');
+require_once('Models/Cart.php');
+
 
 $dbContext = new Database();
 
@@ -13,9 +15,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    try{  // om det är felaktigt användarnamn eller lösenord så kastas ett undantag
-        // och vi hamnar i catch
+    try{
+        $cart = new Cart($dbContext, session_id(), null);
         $dbContext->getUsersDatabase()->getAuth()->login($username, $password);
+        $cart->convertSessionToUser($dbContext->getUsersDatabase()->getAuth()->getUserId(), session_id());
         header('Location: /');
         exit;
     }
@@ -25,9 +28,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 }else{
     // Det är INTE ett formulär som har postats - utan man har klickat in på länk tex edit.php?id=12
 }
-
-//Kunna lagra i databas
-
 
 ?>
 
