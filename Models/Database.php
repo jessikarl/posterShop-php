@@ -4,17 +4,6 @@ require_once('Models/UserDatabase.php');
 require_once('Models/CartItem.php');
 require_once("vendor/autoload.php");
 
-
-
-
-// Hur kan man strukturera klasser
-// Hir kan man struktirera filer? Folders + subfolders
-// NAMESPACES       
-
-// LÄS IN ALLA  .env VARIABLER till $_ENV i PHP
-
-
-
     class Database{
         public $pdo; // PDO är PHP Data Object - en klass som finns i PHP för att kommunicera med databaser
         // I $pdo finns nu funktioner (dvs metoder!) som kan användas för att kommunicera med databasen
@@ -22,12 +11,7 @@ require_once("vendor/autoload.php");
         private $usersDatabase;
         function getUsersDatabase(){
             return $this->usersDatabase;
-        }        
-
-        
-        // Note to Stefan STATIC så inte initieras varje gång
-        
-        // SKILJ PÅ CONFIGURATION OCH KOD
+        }
 
         function __construct() {    
             $host = $_ENV['HOST'];
