@@ -40,10 +40,17 @@ if($catName == ""){
 
         <section class="py-5">
             <div class="container px-4 px-lg-5 mt-5">
+                <div class="text-center mb-4">
+                        <a href="?sortCol=title&sortOrder=asc&q=<?php echo $catName;?>" class="btn btn-secondary">Title asc</a>
+                        <a href="?sortCol=title&sortOrder=desc&q=<?php echo $catName;?>" class="btn btn-secondary">Title desc</a>
+                        <a href="?sortCol=price&sortOrder=asc&q=<?php echo $catName;?>" class="btn btn-secondary">Price asc</a>
+                        <a href="?sortCol=price&sortOrder=desc&q=<?php echo $catName;?>" class="btn btn-secondary">Price desc</a>
+                </div>
+
                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
                 <?php 
                 foreach($dbContext->getCategoryProducts($catName) as $prod){
-                ?>                    
+                ?>
                     <div class="col mb-5">
                             <div class="card h-100">
                                 <?php if($prod->price < 10) {  ?>
