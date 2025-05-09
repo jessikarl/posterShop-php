@@ -28,6 +28,8 @@ if($catName == ""){
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
         <link href="/css/styles.css" rel="stylesheet" />
+        <link href="/css/custom.css" rel="stylesheet" />
+
     </head>
     <body>
         <?php echo HeaderNav($dbContext, $cart) ?>
@@ -58,18 +60,15 @@ if($catName == ""){
                                 <?php if($prod->price < 10) {  ?>
                                     <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
                                 <?php } ?>        
-                                <!-- Product image-->
-                                <img src="<?php echo $prod->imageUrl ?>" alt="<?php echo $prod->title ?>">
-                                <!-- Product details-->
+                                <a href="/productPage?id=<?php echo $prod->id; ?>">
+                                    <img src="<?php echo $prod->imageUrl ?>" alt="<?php echo $prod->title ?>">
+                                </a>
                                 <div class="card-body p-4">
                                     <div class="text-center">
-                                        <!-- Product name-->
                                         <h5 class="fw-bolder"><?php echo $prod->title; ?></h5>
-                                        <!-- Product price-->
                                         $<?php echo $prod->price; ?>.00
                                     </div>
                                 </div>
-                                <!-- Product actions-->
                                 <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                                     <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
                                 </div>
