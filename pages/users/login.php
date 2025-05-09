@@ -25,7 +25,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
         $errorMessage = "Kunde inte logga in";
     }
 }else{
-    // Det är INTE ett formulär som har postats - utan man har klickat in på länk tex edit.php?id=12
 }
 
 ?>
