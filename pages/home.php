@@ -16,7 +16,7 @@ global $dbContext, $cart;
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Shop Homepage - Start Bootstrap Template</title>
+        <title>Shop Homepage</title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Bootstrap icons-->
@@ -50,7 +50,7 @@ global $dbContext, $cart;
                                     <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
                                 <?php } ?>        
                                 <!-- Product image-->
-                                <img src="<?php echo $product->imageUrl ?>" alt="<?php echo $product->title ?>">
+                                <img src="<?php echo $prod->imageUrl ?>" alt="<?php echo $prod->title ?>">
                                 <!-- Product details-->
                                 <div class="card-body p-4">
                                     <div class="text-center">
@@ -70,10 +70,6 @@ global $dbContext, $cart;
                 </div>
             </div> 
         </section>
-
-
-
-
         <!-- Footer-->
          <?php Footer(); ?>
         <!-- Bootstrap core JS-->
