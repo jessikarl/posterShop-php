@@ -14,6 +14,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     $product->stockLevel = $_POST['stockLevel'];
     $product->price = $_POST['price'];
     $product->categoryName = $_POST['categoryName'];
+    $product->imageUrl = $_POST['imageUrl'];
+    $product->popularityFactor = $_POST['popularityFactor'];
+
     $dbContext->updateProduct($product);
     header("Location: /admin/products");
     exit;
@@ -96,6 +99,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
         <div class="form-group">
             <label for="imageUrl">Image Url:</label>
             <input type="text" class="form-control" name="imageUrl" value="<?php echo $product->imageUrl ?>">
+        </div>
+        <div class="form-group">
+            <label for="popularityFactor">Popularity factor</label>
+            <input type="number" class="form-control" name="popularityFactor" value="<?php echo $product->popularityFactor ?>">
         </div>
         <input type="submit" class="btn btn-primary" value="Uppdatera">
     </form>

@@ -6,4 +6,5 @@ class Product{
     public $stockLevel;
     public $categoryName;
     public $imageUrl;
+    public $popularityFactor;
 };
