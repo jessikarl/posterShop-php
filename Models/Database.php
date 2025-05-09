@@ -136,7 +136,7 @@ require_once("vendor/autoload.php");
 
         //function getAllProducts($sortCol, $sortOrder){
         function getAllProducts($sortCol="id", $sortOrder= "asc"){
-            if(!in_array($sortCol,["id", "categoryName",  "title","price","stockLevel", "imageUrl"])){
+            if(!in_array($sortCol,["id", "categoryName", "title","price","stockLevel", "imageUrl"])){
                 $sortCol = "id";
             }
             if(!in_array($sortOrder,["asc", "desc"])){
@@ -153,10 +153,16 @@ require_once("vendor/autoload.php");
             return $query->fetchAll(PDO::FETCH_CLASS, 'Product'); // Product är PHP Klass
         }
 
-        function getCategoryProducts($catName){
+        function getCategoryProducts($catName, $sortCol ="title", $sortOrder = "asc"){
+            if(!in_array($sortCol,["id", "categoryName", "title","price","stockLevel", "imageUrl"])){
+                $sortCol = "title";
+            }
+            if(!in_array($sortOrder,["asc", "desc"])){
+                $sortOrder = "asc";
+            }
             if($catName == ""){
-                $query = $this->pdo->query("SELECT * FROM Products"); // Products är TABELL 
-                return $query->fetchAll(PDO::FETCH_CLASS, 'Product'); // Product är PHP Klass
+                $query = $this->pdo->query("SELECT * FROM Products ORDER BY $sortCol $sortOrder");
+                return $query->fetchAll(PDO::FETCH_CLASS, 'Product');
             }
             $query = $this->pdo->prepare("SELECT * FROM Products WHERE categoryName = :categoryName");
             $query->execute(['categoryName' => $catName]);
