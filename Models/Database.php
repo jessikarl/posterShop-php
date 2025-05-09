@@ -56,7 +56,6 @@ require_once("vendor/autoload.php");
                 $this->pdo->query("INSERT INTO Products (title, price, stockLevel, categoryName, imageUrl) VALUES ('Riviera', 10, 20, 'Landscape','assets/riviera.png')");
                 $this->pdo->query("INSERT INTO Products (title, price, stockLevel, categoryName, imageUrl) VALUES ('Seaside', 10, 20, 'Landscape','assets/seaside.png')");
                 $this->pdo->query("INSERT INTO Products (title, price, stockLevel, categoryName, imageUrl) VALUES ('Sunset', 10, 20, 'Illustration','assets/sunset.png')");
-                $this->pdo->query("INSERT INTO Products (title, price, stockLevel, categoryName, imageUrl) VALUES ('Tropical Beach', 10, 20, 'Illustration','assets/tropical.png')");
                 $this->pdo->query("INSERT INTO Products (title, price, stockLevel, categoryName, imageUrl) VALUES ('Tulip', 10, 20, 'Flower','assets/tulip.png')");
                 $this->pdo->query("INSERT INTO Products (title, price, stockLevel, categoryName, imageUrl) VALUES ('Tulip edition 2', 10, 20, 'Flower','assets/tulip2.png')");
             }
