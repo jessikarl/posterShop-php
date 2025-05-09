@@ -93,6 +93,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
             <label for="categpryName">Category name:</label>
             <input type="text" class="form-control" name="categoryName" value="<?php echo $product->categoryName ?>">
         </div>
+        <div class="form-group">
+            <label for="imageUrl">Image Url:</label>
+            <input type="text" class="form-control" name="imageUrl" value="<?php echo $product->imageUrl ?>">
+        </div>
         <input type="submit" class="btn btn-primary" value="Uppdatera">
     </form>
 </div>

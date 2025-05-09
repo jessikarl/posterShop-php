@@ -5,8 +5,7 @@ require_once('Models/CartItem.php');
 require_once("vendor/autoload.php");
 
     class Database{
-        public $pdo; // PDO är PHP Data Object - en klass som finns i PHP för att kommunicera med databaser
-        // I $pdo finns nu funktioner (dvs metoder!) som kan användas för att kommunicera med databasen
+        public $pdo;
 
         private $usersDatabase;
         function getUsersDatabase(){
@@ -29,18 +28,37 @@ require_once("vendor/autoload.php");
             $this->usersDatabase->seedUsers();
         }
         function initData(){
-            // if select count(*) from Products = 0
-            // lägg till 50 produkter
             $sql = "SELECT COUNT(*) FROM Products";
             $res = $this->pdo->query($sql);
             $count = $res->fetchColumn();
             if($count == 0){
-                $this->pdo->query("INSERT INTO Products (title, price, stockLevel, categoryName) VALUES ('Banana', 10, 100, 'Fruit')");
-                $this->pdo->query("INSERT INTO Products (title, price, stockLevel, categoryName) VALUES ('Apple', 5, 50, 'Fruit')");
-                $this->pdo->query("INSERT INTO Products (title, price, stockLevel, categoryName) VALUES ('Pear', 7, 70, 'Fruit')");
-                $this->pdo->query("INSERT INTO Products (title, price, stockLevel, categoryName) VALUES ('Cucumber', 15, 30, 'Vegetable')");
-                $this->pdo->query("INSERT INTO Products (title, price, stockLevel, categoryName) VALUES ('Tomato', 20, 40, 'Vegetable')");
-                $this->pdo->query("INSERT INTO Products (title, price, stockLevel, categoryName) VALUES ('Carrot', 10, 20, 'Vegetable')");
+                $this->pdo->query("INSERT INTO Products (title, price, stockLevel, categoryName, imageUrl) VALUES ('Beach', 10, 100, 'Landscape','/assets/beach.png')");
+                $this->pdo->query("INSERT INTO Products (title, price, stockLevel, categoryName, imageUrl) VALUES ('Sunny Beach', 5, 50, 'Landscape','/assets/beachsun.png')");
+                $this->pdo->query("INSERT INTO Products (title, price, stockLevel, categoryName, imageUrl) VALUES ('Cats', 7, 70, 'Illustration','/assets/cats.png')");
+                $this->pdo->query("INSERT INTO Products (title, price, stockLevel, categoryName, imageUrl) VALUES ('Cave', 15, 30, 'Landscape','/assets/cave.png')");
+                $this->pdo->query("INSERT INTO Products (title, price, stockLevel, categoryName, imageUrl) VALUES ('Cliff', 20, 40, 'Landscape','/assets/cliff.png')");
+                $this->pdo->query("INSERT INTO Products (title, price, stockLevel, categoryName, imageUrl) VALUES ('Cow', 10, 20, 'Animal','assets/cow.png')");
+                $this->pdo->query("INSERT INTO Products (title, price, stockLevel, categoryName, imageUrl) VALUES ('Dog', 10, 20, 'Illustration','assets/dog.png')");
+                $this->pdo->query("INSERT INTO Products (title, price, stockLevel, categoryName, imageUrl) VALUES ('Dolphin', 10, 20, 'Animal','assets/dolphin.png')");
+                $this->pdo->query("INSERT INTO Products (title, price, stockLevel, categoryName, imageUrl) VALUES ('Drinks', 10, 20, 'Illustration','assets/drinks.png')");
+                $this->pdo->query("INSERT INTO Products (title, price, stockLevel, categoryName, imageUrl) VALUES ('Elephant', 10, 20, 'Animal','assets/elephant.png')");
+                $this->pdo->query("INSERT INTO Products (title, price, stockLevel, categoryName, imageUrl) VALUES ('Flowerfield', 10, 20, 'Flower','assets/flowerfield.png')");
+                $this->pdo->query("INSERT INTO Products (title, price, stockLevel, categoryName, imageUrl) VALUES ('Flowerfield edition 2', 10, 20, 'Flower','assets/flowerfield2.png')");
+                $this->pdo->query("INSERT INTO Products (title, price, stockLevel, categoryName, imageUrl) VALUES ('Giraff', 10, 20, 'Animal','assets/giraff.png')");
+                $this->pdo->query("INSERT INTO Products (title, price, stockLevel, categoryName, imageUrl) VALUES ('Horse', 10, 20, 'Animal','assets/horse.png')");
+                $this->pdo->query("INSERT INTO Products (title, price, stockLevel, categoryName, imageUrl) VALUES ('Lamb', 10, 20, 'Animal','assets/lamb.png')");
+                $this->pdo->query("INSERT INTO Products (title, price, stockLevel, categoryName, imageUrl) VALUES ('Lupin', 10, 20, 'Flower','assets/lupin.png')");
+                $this->pdo->query("INSERT INTO Products (title, price, stockLevel, categoryName, imageUrl) VALUES ('Magnolia', 10, 20, 'Flower','assets/magnolia.png')");
+                $this->pdo->query("INSERT INTO Products (title, price, stockLevel, categoryName, imageUrl) VALUES ('Mountain', 10, 20, 'Landscape','assets/mountain.png')");
+                $this->pdo->query("INSERT INTO Products (title, price, stockLevel, categoryName, imageUrl) VALUES ('Palm Tree', 10, 20, 'Landscape','assets/palm.png')");
+                $this->pdo->query("INSERT INTO Products (title, price, stockLevel, categoryName, imageUrl) VALUES ('Pho', 10, 20, 'Illustration','assets/pho.png')");
+                $this->pdo->query("INSERT INTO Products (title, price, stockLevel, categoryName, imageUrl) VALUES ('Poppy', 10, 20, 'Illustration','assets/poppy.png')");
+                $this->pdo->query("INSERT INTO Products (title, price, stockLevel, categoryName, imageUrl) VALUES ('Riviera', 10, 20, 'Landscape','assets/riviera.png')");
+                $this->pdo->query("INSERT INTO Products (title, price, stockLevel, categoryName, imageUrl) VALUES ('Seaside', 10, 20, 'Landscape','assets/seaside.png')");
+                $this->pdo->query("INSERT INTO Products (title, price, stockLevel, categoryName, imageUrl) VALUES ('Sunset', 10, 20, 'Illustration','assets/sunset.png')");
+                $this->pdo->query("INSERT INTO Products (title, price, stockLevel, categoryName, imageUrl) VALUES ('Tropical Beach', 10, 20, 'Illustration','assets/tropical.png')");
+                $this->pdo->query("INSERT INTO Products (title, price, stockLevel, categoryName, imageUrl) VALUES ('Tulip', 10, 20, 'Flower','assets/tulip.png')");
+                $this->pdo->query("INSERT INTO Products (title, price, stockLevel, categoryName, imageUrl) VALUES ('Tulip edition 2', 10, 20, 'Flower','assets/tulip2.png')");
             }
         }
 
@@ -50,7 +68,8 @@ require_once("vendor/autoload.php");
                 title VARCHAR(50),
                 price INT,
                 stockLevel INT,
-                categoryName VARCHAR(50)
+                categoryName VARCHAR(50),
+                imageUrl VARCHAR(500)
             )');
             $this->pdo->query('CREATE TABLE IF NOT EXISTS CartItem (
                 id INT AUTO_INCREMENT PRIMARY KEY,
@@ -72,10 +91,10 @@ require_once("vendor/autoload.php");
 
         function updateProduct($product){
             $s = "UPDATE Products SET title = :title," .
-                " price = :price, stockLevel = :stockLevel, categoryName = :categoryName WHERE id = :id";
+                " price = :price, stockLevel = :stockLevel, categoryName = :categoryName, imageUrl = :imageUrl WHERE id = :id";
             $query = $this->pdo->prepare($s);
             $query->execute(['title' => $product->title, 'price' => $product->price,
-                'stockLevel' => $product->stockLevel, 'categoryName' => $product->categoryName, 
+                'stockLevel' => $product->stockLevel, 'categoryName' => $product->categoryName, 'imageUrl' => $product->imageUrl, 
                 'id' => $product->id]);
         }
 
@@ -84,11 +103,10 @@ require_once("vendor/autoload.php");
             $query->execute(['id' => $id]);
         }
 
-        function insertProduct($title, $stockLevel, $price, $categoryName) {
-            $sql = "INSERT INTO Products (title, price, stockLevel, categoryName) VALUES (:title, :price, :stockLevel, :categoryName)";
+        function insertProduct($title, $stockLevel, $price, $categoryName, $imageUrl) {
+            $sql = "INSERT INTO Products (title, price, stockLevel, categoryName, imageUrl) VALUES (:title, :price, :stockLevel, :categoryName, :imageUrl)";
             $query = $this->pdo->prepare($sql);
-            $query->execute(['title' => $title, 'price' => $price,
-                'stockLevel' => $stockLevel, 'categoryName' => $categoryName]);
+            $query->execute(['title' => $title, 'price' => $price,'stockLevel' => $stockLevel, 'categoryName' => $categoryName, 'imageUrl' => $imageUrl]);
         }
       
         function searchProducts($q,$sortCol, $sortOrder){
@@ -107,7 +125,7 @@ require_once("vendor/autoload.php");
 
         //function getAllProducts($sortCol, $sortOrder){
         function getAllProducts($sortCol="id", $sortOrder= "asc"){
-            if(!in_array($sortCol,["id", "categoryName",  "title","price","stockLevel"])){
+            if(!in_array($sortCol,["id", "categoryName",  "title","price","stockLevel", "imageUrl"])){
                 $sortCol = "id";
             }
             if(!in_array($sortOrder,["asc", "desc"])){
