@@ -32,3 +32,13 @@
     padding: 10px;
     background-color: antiquewhite;
 }
+
+.card a img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+h3 {
+    color: grey;
+}
