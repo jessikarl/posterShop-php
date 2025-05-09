@@ -40,14 +40,7 @@ $product = $dbContext->getProduct($id);
                         <h3>Price: $<?php echo $product->price; ?></h3>
                         <p><strong>Stock level:</strong><?php echo $product->stockLevel; ?></p>
                         <p><strong>Description:</strong>Beautiful poster for your home!</p>
-
-                    </div>
-
-                </div>
-
-                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                    <div class="text-center">
-                        <a class="btn btn-outline-dark mt-auto" href="/addToCart?productId=<?php echo $prod->id ?>
+                        <a class="btn btn-outline-dark mt-auto" href="/addToCart?productId=<?php echo $product->id ?>
                         &fromPage=<?php echo urlencode((empty($_SERVER['HTTPS']) ? 'http' : 'https') .
                         "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]" ) ?>">Add to cart</a>
                     </div>
