@@ -41,22 +41,24 @@ global $dbContext, $cart;
         <section class="py-5">
             <div class="container px-4 px-lg-5 mt-5">
                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                <?php 
-                foreach($dbContext->getPopularProducts() as $prod){
-                ?>                    
-                    <div class="col mb-5">
+                    <?php 
+                    foreach($dbContext->getPopularProducts() as $prod){
+                    ?>
+                        <div class="col mb-5">
                             <div class="card h-100">
                                 <?php if($prod->price < 10) {  ?>
                                     <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
                                 <?php } ?>        
                                 <!-- Product image-->
-                                <img src="<?php echo $prod->imageUrl ?>" alt="<?php echo $prod->title ?>">
+                                 <!--<a href="/productPage?id=<?php echo $prod->id; ?>">-->
+                                    <img src="<?php echo $prod->imageUrl ?>" alt="<?php echo $prod->title ?>">
+                                 <!--</a>-->
                                 <!-- Product details-->
                                 <div class="card-body p-4">
                                     <div class="text-center">
                                         <!-- Product name-->
                                         <h5 class="fw-bolder"><?php echo $prod->title; ?></h5>
-                                        <!-- Product price-->
+                                       <!-- Product price-->
                                         $<?php echo $prod->price; ?>.00
                                     </div>
                                 </div>
