@@ -74,15 +74,15 @@ Poster webshop - school  assignment
     cd posterShop-php
 
 3. Install dependencies 
-    1. View
-    2. Command Palette 
-    3. Composer install 
+    -  View
+    -  Command Palette 
+    -  Composer install 
 
 4. Set up database (opional)
-    1. Create a database
-    2. Create a .env file 
+    -  Create a database
+    -  Create a .env file 
 
 4. Run the application
-    1. Run 
-    2. Start debugging 
-    3. Launch built-in server and debug
+    - Run 
+    - Start debugging 
+    - Launch built-in server and debug
